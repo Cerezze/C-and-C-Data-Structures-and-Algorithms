@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -14,6 +15,8 @@ class Rec{
         void pop();
         void unshift(int val);
         void shift();
+        void insert(int val, int index);
+        void del(int index);
         ~Rec();
 };
 
@@ -77,6 +80,38 @@ void Rec::shift(){
     }
 }
 
+void Rec::insert(int val, int index){
+    if(index <= size && size < cap){
+        int i = size;
+        while(index < i){
+            i--;
+            A[i + 1] = A[i];
+            
+        }
+        A[i] = val;
+        size++;
+    }else if(size == cap){
+        cout<<"Array Full"<<endl;
+    }else{
+        cout<<"index overflow"<<endl;
+    }
+}
+
+void Rec::del(int index){
+    if(index <= size && size >= 0){
+        int i = index;
+        while(i <= size){
+            A[i] = A[i + 1];
+            i++;
+        }
+        size--;
+    }else if(size == 0){
+        cout<<"Array Empty"<<endl;
+    }else{
+        cout<<"index overflow"<<endl;
+    }
+}
+
 Rec::~Rec(){
     delete A;
 }
@@ -104,8 +139,32 @@ int main()
     
     r.pop();
     
+    r.insert(5, 2);
+    r.insert(9, 3);
+    
+    r.pop();
+    r.shift();
+    r.insert(1, 0);
+    r.insert(3, 4);
+    
+    r.pop();
+    r.shift();
+    
+    r.insert(3, 3);
+    r.insert(1, 4);
+    
+    r.pop();
+    r.shift();
+    
+    r.insert(1, 1);
+    
+    r.del(1);
+    r.del(2);
+    r.del(0);
+    r.del(0);
+    r.del(1);
+    
     r.displayArr();
 
     return 0;
 }
-
