@@ -1,0 +1,111 @@
+#include <iostream>
+using namespace std;
+
+class Rec{
+    private:
+        int size;
+        int cap;
+        int front;
+        int *A;
+    public:
+        Rec(int val);
+        void displayArr();
+        void push(int val);
+        void pop();
+        void unshift(int val);
+        void shift();
+        ~Rec();
+};
+
+Rec::Rec(int val){
+    size = 0;
+    front = 0;
+    cap = val;
+    A = new int[cap];
+}
+
+void Rec::displayArr(){
+    for(int i = 0; i < cap; i++){
+        cout<<*(A + i)<<" ";
+    }
+}
+
+void Rec::push(int val){
+    if(size < cap){
+        A[size] = val;
+        size++;
+    }else{
+        cout<<"Array Full"<<endl;
+    }
+}
+
+void Rec::pop(){
+    if(size > 0){
+        size--;
+        A[size] = 0;
+    }else{
+        cout<<"Array Empty"<<endl;
+    }
+}
+
+void Rec::unshift(int val){
+    if(size < cap){
+        int i = size - 1;
+        while(i >= 0){
+            A[i + 1] = A[i];
+            i--;
+        }
+        A[front] = val;
+        size++;
+    }else{
+        cout<<"Array Full"<<endl;
+    }
+}
+
+void Rec::shift(){
+    if(size > 0){
+        int i = front;
+        
+        while(i < size){
+            A[i] = A[i + 1];
+            i++;
+        }
+        
+        size--;
+    }else{
+        cout<<"Array Empty"<<endl;
+    }
+}
+
+Rec::~Rec(){
+    delete A;
+}
+
+int main()
+{
+    Rec r(5);
+    
+    r.push(1);
+    r.push(3);
+    r.push(8);
+    
+    r.pop();
+    r.pop();
+    
+    r.unshift(2);
+    r.unshift(9);
+    r.unshift(4);
+    
+    r.shift();
+    r.shift();
+    
+    r.unshift(4);
+    r.push(8);
+    
+    r.pop();
+    
+    r.displayArr();
+
+    return 0;
+}
+
