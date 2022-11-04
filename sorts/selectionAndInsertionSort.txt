@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void selectionSort(int Arr[]){
+    for(int i = 0; i < 6; i++){
+        int smallest = i;
+        for(int j = i + 1; j < 6; j++){
+            if(Arr[j] < Arr[smallest]){
+                int temp = Arr[j];
+                Arr[j] = Arr[smallest];
+                Arr[smallest] = temp;
+            }
+        }
+    }
+}
+
+void insertionSort(int Arr[]){
+    for(int i = 1; i < 6; i++){
+        int current = Arr[i];
+        int j = i - 1;
+        for(j ; j >= 0 && Arr[j] > current; j--){
+            Arr[j + 1] = Arr[j];
+        }
+        Arr[j + 1] = current;
+    }
+}
+
+int main()
+{
+    int a[] = {5, 1, 2, 8, 0, 3};
+    
+    for(int i = 0; i < 6; i++){
+        cout<<a[i];
+    }
+    
+    insertionSort(a);
+    cout<<endl;
+    
+    for(int i = 0; i < 6; i++){
+        cout<<a[i];
+    }
+    
+    return 0;
+}
